@@ -27,6 +27,10 @@ def crearBaseDeDatos():
 
   conn.close()
   
+### girarRuleta():
+# Por ahora, genera un número aleatorio del 1 al 4 y en base a ese número crea un string
+# Ambas variables se guardan en una lista y se devuelven para poder mostrarse más tarde en la página de 'ruleta'
+# num como el resultado y el string como mensaje para aclarar.
 def girarRuleta():
   num = randint(1, 4)
   if num == 1:
