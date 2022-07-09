@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    
+  </style>
+
+  <head>
+    <title>Pregunta</title>
+  </head>
+  
+  <body>
+    <header>
+      <h1>{{pre[1]}}</h1>
+    </header>
+
+    <article>
+      <section>
+        <form id="formulario" action="/perdiste" method="post">
+          <input id="nombre" class="form-control" name="nombreJugador" type="hidden" value="{{jug}}" readonly>
+        </form>
+      </section>
+    </article>
+    <script>
+      function random(min, max) {
+        return Math.floor((Math.random() * (max - min + 1)) + min);
+      }
+      
+      function barajarOpciones()
+      {
+        indices = new Array(random(0, 3), -1, -1, -1);
+      
+        do
+        {
+          indices[1] = random(0, 3);
+        }while(indices[1] == indices[0]);
+        do
+        {
+          indices[2] = random(0, 3);
+        }while(indices[2] == indices[0] || indices[2] == indices[1]);
+        do
+        {
+          indices[3] = random(0, 3);
+        }while(indices[3] == indices[0] || indices[3] == indices[1] || indices[3] == indices[2]);
+
+        var form = document.getElementById('formulario');
+      
+        opciones = ['<input id="1" type="submit" formaction="/correcto" value="{{pre[2]}}">', '<input id="2" type="submit" value="{{pre[3]}}">', '<input id="3" type="submit" value="{{pre[4]}}">', '<input id="4" type="submit" value="{{pre[5]}}">']
+        
+        orden = ''
+        
+        for(let i = 0 ; i < indices.length ; i++)
+        {
+          orden += opciones[indices[i]]
+        }
+        
+        form.innerHTML += orden;
+      }
+
+      barajarOpciones();
+    </script>
+  </body>
+</html>
