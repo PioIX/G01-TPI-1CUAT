@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    #nombre
+    {
+      width: 300px;
+    }
+  </style>
+
+  <head>
+    <title>Ingresar Nombre</title>
+  </head>
+  
+  <body>
+    <article>
+      <section>
+        <form id="formulario" action="/ruleta" method="post">
+          <label for="nombreJugador">INGRESA TU NOMBRE</label><br>
+          <input type="text" class="form-control" id="nombre" name="nombreJugador" placeholder="Ingresa tu nombre (Entre 3 y 10 letras)"><br>
+          <input type="button" onclick="validar({{jugadores}})" value="VALIDAR DATOS"><br>
+          <input id="boton" type="submit" value=">" disabled>
+        </form>
+      </section>
+    </article>
+    
+    <script>
+      function validar(jugadores)
+      {
+        var nombre = document.getElementById('nombre');
+        valido = true;
+        
+        if(nombre.value.length < 3 || nombre.value.length > 10)
+        {
+          alert("El nombre debe tener por lo menos 3 carácteres y como máximo 10.")
+          valido = false;
+          return false;
+        }
+        for(let i = 0 ; i < jugadores.length ; i++)
+        {
+          if(nombre.value == jugadores[i])
+          {
+            alert("El nombre ingresado ya fue usado por otro jugador.\nPor favor intente con uno diferente.")
+            valido = false;
+            return false;
+          }
+        }
+        if(valido == true)
+        {
+          var boton = document.getElementById('boton');
+      
+          nombre.setAttribute('readonly', 'true');
+          boton.removeAttribute('disabled');
+        }
+      }
+    </script>
+  </body>
+</html>
