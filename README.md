@@ -21,11 +21,12 @@ https://docs.google.com/document/d/1xGO1DjLv1bD5pJyI-0qKa4lQ6samu9PrN9SNyLDruPM/
 ## Índice:
 ### Templates:
 * Contiene los archivos '.html' que se usan en la app.
-### CSS:
-* Contiene el archivo '.css' que se usa en la app.
-### img:
+### Static:
+* Contiene el archivo 'styles.css' que se usa en la app.
+  ### img:
 * Contiene las imagenes que se usan en la app.
 ### Docs:
 * Contiene el documento con las preguntas, sus respuestas y las reglas del juego.
-### Base de datos:
-* Contiene la base de datos
+### Sin carpeta:
+* el archivo de 'main.py'
+* la base de datos
