@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registro</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <link rel="icon" href="./static/img/pageicon.png">
+  </head>
+  
+  <body class="fondo">
+    <header>
+      <h1 class="titulo">INGRESA TU NOMBRE</h1>
+    </header>
+    
+    <article>
+      <section id="form">
+        <form id="formulario" action="/ruleta" method="post">
+          <input type="text" class="form-control" id="ingreso" name="nombreJugador" placeholder="Ingresa tu nombre (Entre 3 y 20 letras)">
+          <input id="validacion" type="button" onclick="validar({{jugadores}})" value="COMPROBAR DATOS">
+          <input class="continuar" id="noDisponible" type="image" src="./static/img/next.png" disabled>
+        </form>
+      </section>
+      <div class="modal-container" id="usuarioCorrecto">
+        <div class="modal">
+          <button id="close" onclick="desaparecerMensaje('usuarioCorrecto')">X</button>
+          <h1 id="modalTitle">NOMBRE DISPONIBLE</h1>
+        </div>          
+      </div>
+      <div class="modal-container" id="usuarioUsado">
+        <div class="modal">
+          <button id="close" onclick="desaparecerMensaje('usuarioUsado')">X</button>
+          <h1 id="modalTitle">NOMBRE EN USO</h1>
+          <p>
+            El nombre ingresado ya fue usado por otro jugador.
+            Por favor intente con uno diferente.
+          </p>
+        </div>          
+      </div>
+      <div class="modal-container" id="usuarioNoPosible">
+        <div class="modal">
+          <button id="close" onclick="desaparecerMensaje('usuarioNoPosible')">X</button>
+          <h1 id="modalTitle"> NOMBRE NO POSIBLE</h1>
+          <p>El nombre debe tener por lo menos 3 carácteres y como máximo 20.</p>
+        </div>          
+      </div> 
+    </article>
+    
+    <script>
+      function validar(jugadores)
+      {
+        var nombre = document.getElementById('ingreso');
+        valido = true;
+        
+        if(nombre.value.length < 3 || nombre.value.length > 20)
+        {
+          aparecerMensaje('usuarioNoPosible');
+          valido = false;
+          return false;
+        }
+        for(let i = 0 ; i < jugadores.length ; i++)
+        {
+          if(nombre.value == jugadores[i])
+          {
+            aparecerMensaje('usuarioUsado');
+            valido = false;
+            return false;
+          }
+        }
+        if(valido == true)
+        {
+          var boton = document.querySelector(".continuar");
+          var validacion = document.getElementById('validacion');
+          const modal = document.querySelector('.modal');
+
+          modal.innerHTML += 
+          `
+            <p>Su puntaje se registrará bajo el nombre de: '${nombre.value}'<br>Ya puede pulsar el botón para continuar.</p>
+          `
+          
+          aparecerMensaje('usuarioCorrecto');
+          
+          nombre.setAttribute('readonly', 'true');
+          boton.removeAttribute('id');
+          boton.setAttribute('id', 'boton');
+          boton.removeAttribute('disabled');
+          validacion.setAttribute('disabled', 'true');
+        }
+      }
+
+      function aparecerMensaje(tipo)
+      {
+        const modal = document.getElementById(tipo);
+        modal.classList.add('show');        
+      }
+
+      function desaparecerMensaje(tipo)
+      {
+        const modal = document.getElementById(tipo);
+        modal.classList.remove('show');
+        if(tipo == 'usuarioCorrecto')
+        {
+          modal.innerHTML = 
+          `
+            <button id="close" onclick="desaparecerMensaje('usuarioCorrecto')">X</button>
+            <h1 id="modalTitle">NOMBRE DISPONIBLE</h1>
+          `;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Correcto</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <link rel="icon" href="./static/img/pageicon.png">
+  </head>
+  
+  <body class="fondo">
+    <header>
+      <h1 id="correcto" class="completo">¡CORRECTO!</h1>
+    </header>
+
+    <article>
+      <section>
+        <form id="formulario" action="/ruleta" method="post">
+          <input id="contador" class="form-control" name="contador" type="hidden" value="{{contador}}" readonly>
+          <input id="nombre" class="form-control" name="nombreJugador" type="hidden" value="{{jug}}" readonly>
+          <input id="boton" class="continuar" type="image" src="./static/img/next.png">
+        </form>
+      </section>
+    </article>
+    
+    <script>
+      verficacionGanar(document.getElementById('contador').value)
+      
+      function verficacionGanar(contador)
+      {
+        if(contador == 16)
+        {
+          var boton = document.getElementById('boton')
+
+          boton.setAttribute('formaction', '/ganaste')
+        }
+      }
+    </script>
+  </body>
+</html>

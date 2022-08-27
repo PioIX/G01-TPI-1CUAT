@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Puntajes</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <link rel="icon" href="./static/img/pageicon.png">
+  </head>
+  
+  <body class="fondo">
+    <header>
+      <h1 class="titulo">TABLA DE PUNTAJES</h1>
+    </header>
+
+    <article class="contenedorTabla">
+      <section class="main-conteiner">
+        <table>
+          <tr class="thead">
+            <th>Posición</th>
+            <th>Nombre</th>
+            <th>Puntos</th>
+            <th>Tiempo (Seg)</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td id="nombreTop1">{{mejoresJugadores[0][0]}}</td>
+            <td>{{mejoresJugadores[0][1]}}</td>
+            <td>{{mejoresJugadores[0][2]}}</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td id="nombreTop2">{{mejoresJugadores[1][0]}}</td>
+            <td>{{mejoresJugadores[1][1]}}</td>
+            <td>{{mejoresJugadores[1][2]}}</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td id="nombreTop3">{{mejoresJugadores[2][0]}}</td>
+            <td>{{mejoresJugadores[2][1]}}</td>
+            <td>{{mejoresJugadores[2][2]}}</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td id="nombreTop4">{{mejoresJugadores[3][0]}}</td>
+            <td>{{mejoresJugadores[3][1]}}</td>
+            <td>{{mejoresJugadores[3][2]}}</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td id="nombreTop5">{{mejoresJugadores[4][0]}}</td>
+            <td>{{mejoresJugadores[4][1]}}</td>
+            <td>{{mejoresJugadores[4][2]}}</td>
+          </tr>
+        </table>
+      </section>
+      <div class="modal-container" id="modal_container">
+          <div class="modal">
+            <button id="close" onclick="desaparecerMensaje()">X</button>
+            <h1 id="modalTitle">FELICIDADES</h1>
+            <p>¡Buen trabajo! ¡Quedaste entre los mejores 5 jugadores!</p>
+          </div>          
+        </div>  
+      <a class="volver" id="boton" href="./">Volver a jugar</a>                        
+      <input class="jugador" type="hidden" value="{{jug}}" disabled>
+    </article>
+    
+    <script>
+        mejoresJugadores = [document.getElementById('nombreTop1'), document.getElementById('nombreTop2'), document.getElementById('nombreTop3'), document.getElementById('nombreTop4'), document.getElementById('nombreTop5')]
+        jug = document.querySelector('.jugador').value
+              
+      for(let i = 0 ; i < 5 ; i++)
+      {
+        if(jug == mejoresJugadores[i].innerHTML)
+        {
+          aparecerMensaje();
+        }
+      }
+
+      function aparecerMensaje()
+      {
+        const modal = document.querySelector('.modal-container');
+        modal.classList.add('show');        
+      }
+
+      function desaparecerMensaje()
+      {
+        const modal = document.querySelector('.modal-container');
+        modal.classList.remove('show');
+      }
+    </script>
+  </body>
+</html>

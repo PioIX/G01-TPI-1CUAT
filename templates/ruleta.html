@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <style>
+
+  </style>
+
+  <head>
+    <title>Ruleta</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <link rel="icon" href="./static/img/pageicon.png">
+  </head>
+  
+  <body class="fondo">
+    <header>
+      <h1 class="titulo">GIRAR LA RULETA</h1>
+    </header>
+    
+    <article>
+      <section id="form">
+        <div id="app">
+          <img class="marker" src="/static/img/marker.png"/>
+          <img class="wheel" src="/static/img/ruletas/{{rul}}"/>
+          <img id="button" onclick="document.getElementById('button').src = './static/img/button2.png'; girarRuleta(document.querySelector('.button'), document.querySelector('.wheel'), 0, {{deg}}, {{pregs}});" src="/static/img/button.png"/>
+        </div>
+        <form id="formulario" action="/pregunta" method="post">
+          <input id="nombre" class="form-control" name="nombreJugador" type="hidden" value="{{jug}}" readonly>
+          <input id="ods" class="form-control" name="odsSeleccionado" type="hidden" value="1" readonly>
+          <input class="continuar" type="image" src="./static/img/next.png" disabled>
+        </form>
+        <div class="modal-container" id="modal_container">
+          <div class="modal">
+            <button id="close" onclick="desaparecerMensaje()">X</button>
+            <h1 id="modalTitle">RESULTADO:</h1>
+          </div>          
+        </div>        
+      </section>
+    </article>
+    
+    <script>
+      const button = document.getElementById('button');
+      button.removeAttribute('class')
+      button.setAttribute('class', 'button');      
+      
+      function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+          currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+      }
+      
+      function girarRuleta(startButton, wheel, deg, zoneSize, symbolSegments)
+      {
+        startButton.style.pointerEvents = 'none';
+        deg = Math.floor(3000 + Math.random() * 3000);
+        wheel.style.transition = 'all 5s ease-out';
+        wheel.style.transform = `rotate(${deg}deg)`;
+        setTimeout(() => { rotacionRuleta(startButton, wheel, deg, zoneSize, symbolSegments); }, 5001);
+        
+      }
+
+      function rotacionRuleta(startButton, wheel, deg, zoneSize, symbolSegments)
+      {
+        startButton.style.pointerEvents = 'auto';
+        wheel.style.transition = 'none';
+        const actualDeg = deg % 360;
+        wheel.style.transform = `rotate(${actualDeg}deg)`;
+        handleWin(actualDeg, zoneSize, symbolSegments);
+      }
+
+      function handleWin(actualDeg, zoneSize, symbolSegments)
+      {
+        const winningSymbolNr = Math.ceil(actualDeg / zoneSize);
+        const ods = document.getElementById('ods')
+        ods.value = symbolSegments[winningSymbolNr][0];
+        const next = document.querySelector('.continuar');
+        next.setAttribute('id', 'boton');
+        next.removeAttribute('disabled');
+        const modal = document.querySelector('.modal');
+        modal.innerHTML += 
+        `
+        <p>La próxima pregunta será sobre el ${symbolSegments[winningSymbolNr][1]}</p>
+        `
+        aparecerMensaje();
+      }
+      
+      function aparecerMensaje()
+      {
+        const modal = document.getElementById('modal_container');
+        modal.classList.add('show');        
+      }
+
+      function desaparecerMensaje()
+      {
+        const modal = document.getElementById('modal_container');
+        modal.classList.remove('show');
+        modal.innerHTML = 
+        `
+          <button id="close" onclick="desaparecerMensaje()">X</button>
+          <h1 id="modalTitle">RESULTADO:</h1>
+        `;
+        const button = document.querySelector('.button');
+        button.removeAttribute('class');
+        button.setAttribute('class', 'noDisponible')
+      }
+    </script>
+  </body>
+</html>
