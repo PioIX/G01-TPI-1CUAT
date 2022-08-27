@@ -18,6 +18,9 @@ https://replit.com/@Bono-EzequielEz/Proyecto-Interdisciplinario-CUAT-1#main.py
 ## Presupuesto:
 https://docs.google.com/document/d/1xGO1DjLv1bD5pJyI-0qKa4lQ6samu9PrN9SNyLDruPM/edit?usp=sharing
 
+## Preguntas y Respuestas - Reglas y Puntajes:
+https://docs.google.com/document/d/17-RT-5bg9aNww0IV8ExO2MLYFmJeNQCS9yjR2734ilE/edit
+
 ## Índice:
 ### Templates:
 * Contiene los archivos '.html' que se usan en la app.
