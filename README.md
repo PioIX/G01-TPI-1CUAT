@@ -15,6 +15,9 @@ Vamos a desarrollar una aplicación web que permita mostrar los conocimientos de
 ## App de Flask:
 https://replit.com/@Bono-EzequielEz/Proyecto-Interdisciplinario-CUAT-1#main.py
 
+## App en PythonAnywhere:
+http://neerbono.pythonanywhere.com/
+
 ## Presupuesto:
 https://docs.google.com/document/d/1xGO1DjLv1bD5pJyI-0qKa4lQ6samu9PrN9SNyLDruPM/edit?usp=sharing
 
